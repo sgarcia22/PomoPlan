@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import java.util.*;
 
 public class MainNav extends AppCompatActivity {
@@ -57,22 +58,28 @@ public class MainNav extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listItems);
         scroll.setAdapter(adapter);
 
+        //Drop Down Button
+        Spinner spinner = findViewById(R.id.spinner);
+
+
         Button addTask = (Button) findViewById(R.id.add_task);
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText text = (EditText)findViewById(R.id.editText);
-                String taskName = text.getText().toString();
-                if (!taskName.isEmpty()) {
-                    //Add task to the list
-                    taskToList(taskName);
-                }
+                createTask();
             }
         });
     }
 
     private void createTask () {
+        String taskName = findViewById(R.id.editText).toString();
+        String time = findViewById(R.id.time).toString();
 
+
+        if (taskName.isEmpty() || time.isEmpty()) {
+            //Add task to the list
+            return;
+        }
     }
 
     private void taskToList (String task) {

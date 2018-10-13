@@ -5,4 +5,11 @@
     <string name="title_notifications">Notifications</string>
     <string name="task_name">Task Name</string>
     <string name="add_task">Add Task</string>
+    <string name="time_val">Time</string>
+
+    <string-array name = "Periods">
+        <item>Home</item>
+        <item>Work</item>
+    </string-array>
+
 </resources>

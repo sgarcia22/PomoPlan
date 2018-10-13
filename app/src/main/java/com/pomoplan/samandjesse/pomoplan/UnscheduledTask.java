@@ -1,4 +1,4 @@
-package testy;
+package com.pomoplan.samandjesse.pomoplan;
 
 import java.util.ArrayList;
 

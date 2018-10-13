@@ -5,9 +5,9 @@ public class Task {
     private String taskName;
     private int taskLengthHours;
     private int taskLengthMinutes;
-    private Periods category;
+    private Period category;
 
-    public Task (String name, int hours, int minutes, Periods cat) {
+    public Task (String name, int hours, int minutes, Period cat) {
         taskName = name;
         taskLengthHours = hours;
         taskLengthMinutes = minutes;
@@ -26,7 +26,7 @@ public class Task {
         return taskLengthMinutes;
     }
 
-    public Periods getCat () {
+    public Period getCat () {
         return category;
     }
 

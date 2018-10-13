@@ -1,4 +1,4 @@
-package testy;
+package com.pomoplan.samandjesse.pomoplan;
 
 import java.time.Instant;
 import java.time.OffsetTime;
