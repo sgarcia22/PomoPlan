@@ -18,6 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PomodoraTimer"
+            android:label="@string/title_activity_pomodora_timer" />
+        <activity
+            android:name=".Scheduler"
+            android:label="@string/title_activity_scheduler"></activity>
     </application>
 
 </manifest>

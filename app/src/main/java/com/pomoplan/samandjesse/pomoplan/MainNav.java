@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -15,10 +13,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import java.util.*;
 import android.view.WindowManager;
-import java.text.DateFormat;
-import java.util.Date;
-import java.text.*;
-import java.util.regex.Pattern;
+import android.content.Intent;
 
 public class MainNav extends AppCompatActivity {
 
@@ -36,15 +31,18 @@ public class MainNav extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
-                    return true;
+                    break;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
-                    return true;
+                    Intent intent = new Intent (MainNav.this, Scheduler.class);
+                    startActivityForResult(intent, 0); // Result to ensure about back track of proper activity
+                    setContentView(R.layout.activity_scheduler);
+                    break;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
-                    return true;
+                    break;
             }
-            return false;
+            return true;
         }
     };
 
@@ -65,7 +63,6 @@ public class MainNav extends AppCompatActivity {
 
         listItems = new ArrayList<Task>();
 
-        //TODO
         adapter = new TaskListAdapter(this, R.layout.adapter_view_layout, listItems);
         scroll.setAdapter(adapter);
 
