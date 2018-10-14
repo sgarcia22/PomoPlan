@@ -20,12 +20,15 @@
         </activity>
         <activity
 <<<<<<< HEAD
+<<<<<<< HEAD
             android:name=".PomodoraTimer"
             android:label="@string/title_activity_pomodora_timer" />
         <activity
             android:name=".Scheduler"
             android:label="@string/title_activity_scheduler"></activity>
 =======
+            android:name=".Availability"
+            android:label="@string/title_activity_availability"></activity>
 >>>>>>> a6585df0a78c2617f4cca5b9c21914f59d55ebe8
 =======
             android:name=".Availability"

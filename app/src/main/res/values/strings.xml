@@ -12,12 +12,14 @@
         <item>Work</item>
     </string-array>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <string name="title_activity_pomodora_timer">PomodoraTimer</string>
     <string name="title_activity_scheduler">Scheduler</string>
 =======
     <string name="title_activity_availability">Availability</string>
 >>>>>>> a6585df0a78c2617f4cca5b9c21914f59d55ebe8
 =======
+    <string name="title_activity_availability">Availability</string>
 >>>>>>> a6585df0a78c2617f4cca5b9c21914f59d55ebe8
 
 </resources>
