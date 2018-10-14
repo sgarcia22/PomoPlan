@@ -18,7 +18,7 @@ import android.content.Intent;
 public class MainNav extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private ArrayList<Task> listItems;
+    private ArrayList<UnscheduledTask> listItems;
     private TaskListAdapter adapter;
     private ListView scroll;
     private Spinner spinner;
@@ -58,7 +58,7 @@ public class MainNav extends AppCompatActivity {
         //Get the list view
         scroll = (ListView) findViewById(R.id.listView);
 
-        listItems = new ArrayList<Task>();
+        listItems = new ArrayList<UnscheduledTask>();
 
         adapter = new TaskListAdapter(this, R.layout.adapter_view_layout, listItems);
         scroll.setAdapter(adapter);
@@ -122,8 +122,10 @@ public class MainNav extends AppCompatActivity {
         } catch (NumberFormatException e) {
             return;
         }
+        ArrayList<Period> periods = new ArrayList<Period>();
+        periods.add(p);
 
-        Task inputtedTask = new Task(task, hours, minutes, p);
+        UnscheduledTask inputtedTask = new UnscheduledTask(task, periods, hours, minutes);
 
         listItems.add(inputtedTask);
         adapter.notifyDataSetChanged();
