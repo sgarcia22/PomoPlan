@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import java.util.*;
@@ -16,12 +18,13 @@ import android.view.WindowManager;
 import java.text.DateFormat;
 import java.util.Date;
 import java.text.*;
+import java.util.regex.Pattern;
 
 public class MainNav extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private ArrayList<Task> listItems = new ArrayList<Task>();
-    private ArrayAdapter<String> adapter;
+    private ArrayList<Task> listItems;
+    private TaskListAdapter adapter;
     private ListView scroll;
     private Spinner spinner;
 
@@ -60,8 +63,10 @@ public class MainNav extends AppCompatActivity {
         //Get the list view
         scroll = (ListView) findViewById(R.id.listView);
 
+        listItems = new ArrayList<Task>();
+
         //TODO
-        TaskListAdapter adapter = new TaskListAdapter(this, R.layout.adapter_view_layout, listItems);
+        adapter = new TaskListAdapter(this, R.layout.adapter_view_layout, listItems);
         scroll.setAdapter(adapter);
 
         //Drop Down Button
@@ -79,8 +84,8 @@ public class MainNav extends AppCompatActivity {
 
     //Create a task with the given inputs
     private void createTask () {
-        String taskName = findViewById(R.id.editText).toString();
-        String time = findViewById(R.id.time).toString();
+        String taskName = ((EditText)findViewById(R.id.editText)).getText().toString();
+        String time = ((EditText)findViewById(R.id.time)).getText().toString();
         String spinnerText = spinner.getSelectedItem().toString();
 
         if (taskName.isEmpty() || time.isEmpty() || spinnerText.isEmpty()) {
@@ -92,19 +97,27 @@ public class MainNav extends AppCompatActivity {
     }
 
     private void taskToList (String task, String time, String spinnerText) {
-        DateFormat formatter = new SimpleDateFormat("hh:mm a");
-        Date date;
+
+        Period p = new Period (spinnerText);
+        int hours = 0, minutes = 0;
+
+        String [] totalTime = time.split("[:]");
+        System.out.print(totalTime);
         try {
-            date = formatter.parse(time);
-        } catch (ParseException e) {
+            if (totalTime.length == 1)
+                minutes = Integer.parseInt(totalTime[0].trim());
+            if (totalTime.length == 2) {
+                hours = Integer.parseInt(totalTime[0].trim());
+                minutes = Integer.parseInt(totalTime[1].trim());
+            }
+        } catch (NumberFormatException e) {
             return;
         }
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        Period p = new Period (spinnerText);
 
-        Task inputtedTask = new Task(task, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), p);
+        Task inputtedTask = new Task(task, hours, minutes, p);
+
         listItems.add(inputtedTask);
         adapter.notifyDataSetChanged();
+
     }
 }
