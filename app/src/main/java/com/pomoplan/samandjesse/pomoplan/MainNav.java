@@ -6,22 +6,21 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import java.util.*;
 import android.view.WindowManager;
-import android.widget.Toast;
+import java.text.DateFormat;
+import java.util.Date;
+import java.text.*;
 
 public class MainNav extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private ArrayList<String> listItems = new ArrayList<String>();
+    private ArrayList<Task> listItems = new ArrayList<Task>();
     private ArrayAdapter<String> adapter;
     private ListView scroll;
     private Spinner spinner;
@@ -58,11 +57,11 @@ public class MainNav extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.menu);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        //Get the list view for the items list
-        scroll = (ListView) findViewById(R.id.list_items);
+        //Get the list view
+        scroll = (ListView) findViewById(R.id.listView);
 
-        //Handle items in the list
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listItems);
+        //TODO
+        TaskListAdapter adapter = new TaskListAdapter(this, R.layout.adapter_view_layout, listItems);
         scroll.setAdapter(adapter);
 
         //Drop Down Button
@@ -89,11 +88,23 @@ public class MainNav extends AppCompatActivity {
             return;
         }
 
-        taskToList(taskName);
+        taskToList(taskName, time, spinnerText);
     }
 
-    private void taskToList (String task) {
-        listItems.add(task);
+    private void taskToList (String task, String time, String spinnerText) {
+        DateFormat formatter = new SimpleDateFormat("hh:mm a");
+        Date date;
+        try {
+            date = formatter.parse(time);
+        } catch (ParseException e) {
+            return;
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        Period p = new Period (spinnerText);
+
+        Task inputtedTask = new Task(task, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), p);
+        listItems.add(inputtedTask);
         adapter.notifyDataSetChanged();
     }
 
