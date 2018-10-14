@@ -93,5 +93,18 @@ public class Schedule {
 		}
 		return intervals;
 	}
-}
 
+	public static ArrayList<String> scheduleOutput(ArrayList<ScheduledTask> scheduledTasks) {
+		ArrayList<String> schedule = new ArrayList<String>();
+		for(ScheduledTask task: scheduledTasks) {
+			StringBuilder stringBuilder = new StringBuilder(task.name);
+			stringBuilder.append(": (");
+			stringBuilder.append(task.getStartTimeString());
+			stringBuilder.append(" - ");
+			stringBuilder.append(task.getEndTimeString());
+			stringBuilder.append(")");
+			schedule.add(stringBuilder.toString());
+		}
+		return schedule;
+	}
+}
