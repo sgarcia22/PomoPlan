@@ -1,6 +1,5 @@
 package com.pomoplan.samandjesse.pomoplan;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -24,7 +23,7 @@ import java.util.regex.Pattern;
 public class MainNav extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private ArrayList<UnscheduledTask> listItems;
+    private ArrayList<Task> listItems;
     private TaskListAdapter adapter;
     private ListView scroll;
     private Spinner spinner;
@@ -36,19 +35,13 @@ public class MainNav extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Intent intent1 = new Intent(MainNav.this, MainNav.class);
-                    intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(intent1);
+                    mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    Intent intent2 = new Intent(MainNav.this, ScheduleActivity.class);
-                    intent2.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(intent2);
+                    mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
-                    Intent intent3 = new Intent(MainNav.this, MainNav.class);
-                    intent3.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(intent3);
+                    mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
             return false;
@@ -70,7 +63,7 @@ public class MainNav extends AppCompatActivity {
         //Get the list view
         scroll = (ListView) findViewById(R.id.listView);
 
-        listItems = new ArrayList<UnscheduledTask>();
+        listItems = new ArrayList<Task>();
 
         //TODO
         adapter = new TaskListAdapter(this, R.layout.adapter_view_layout, listItems);
@@ -120,10 +113,8 @@ public class MainNav extends AppCompatActivity {
         } catch (NumberFormatException e) {
             return;
         }
-        ArrayList<Period> periods = new ArrayList<Period>();
-        periods.add(p);
 
-        UnscheduledTask inputtedTask = new UnscheduledTask(task, periods, hours, minutes);
+        Task inputtedTask = new Task(task, hours, minutes, p);
 
         listItems.add(inputtedTask);
         adapter.notifyDataSetChanged();

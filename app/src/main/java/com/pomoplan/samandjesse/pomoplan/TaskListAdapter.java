@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class TaskListAdapter extends ArrayAdapter<UnscheduledTask> {
+public class TaskListAdapter extends ArrayAdapter<Task> {
 
     private Context currContext;
     private int currResource;
-    public TaskListAdapter(Context context, int resource, List<UnscheduledTask> objects) {
+    public TaskListAdapter(Context context, int resource, List<Task> objects) {
         super(context, resource, objects);
         currContext = context;
         currResource = resource;
@@ -23,14 +23,15 @@ public class TaskListAdapter extends ArrayAdapter<UnscheduledTask> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         String name = getItem(position).getName();
-        int hours = getItem(position).getHours();
+        int hours = getItem(position).getTaskLengthHours();
         String hoursText = Integer.toString(hours);
-        int minutes = getItem(position).getMinutes();
+        int minutes = getItem(position).getTaskLengthMinutes();
         String minutesText = Integer.toString(minutes);
-        Period period = getItem(position).getCat().get(0);
+        Period period = getItem(position).getCat();
         String periodText = period.name;
         String totaltime = hoursText + ":" + minutesText;
 
+        Task newTask = new Task(name, hours, minutes, period);
         LayoutInflater inflator = LayoutInflater.from(currContext);
         convertView = inflator.inflate(currResource, parent, false);
 

@@ -11,6 +11,6 @@
         <item>Home</item>
         <item>Work</item>
     </string-array>
-    <string name="title_activity_schedule">Schedule</string>
-  
+    <string name="title_activity_availability">Availability</string>
+
 </resources>
