@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -15,10 +13,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import java.util.*;
 import android.view.WindowManager;
-import java.text.DateFormat;
-import java.util.Date;
-import java.text.*;
-import java.util.regex.Pattern;
+import android.content.Intent;
 
 public class MainNav extends AppCompatActivity {
 
@@ -65,7 +60,6 @@ public class MainNav extends AppCompatActivity {
 
         listItems = new ArrayList<Task>();
 
-        //TODO
         adapter = new TaskListAdapter(this, R.layout.adapter_view_layout, listItems);
         scroll.setAdapter(adapter);
 
@@ -80,6 +74,21 @@ public class MainNav extends AppCompatActivity {
                 createTask();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu:
+                Intent intent = new Intent(this, MainNav.class);
+                this.startActivity(intent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+        return true;
     }
 
     //Create a task with the given inputs
