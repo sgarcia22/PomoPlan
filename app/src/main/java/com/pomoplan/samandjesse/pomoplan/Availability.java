@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.text.format.DateFormat;
@@ -21,7 +23,9 @@ public class Availability extends AppCompatActivity {
 
     private TextView mTextMessage;
     ArrayList<Integer> hourMinute;
-    ArrayList<Integer> days;
+    String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Friday", "Saturday"};
+    boolean[] checked = {false, false, false, false, false, false, false};
+    String name = "";
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -60,12 +64,27 @@ public class Availability extends AppCompatActivity {
     }
 
     public void timeIntervalProcessStart() {
-        days = new ArrayList<Integer>();
         //day of week dialog
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        final EditText input = new EditText(Availability.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        alertDialogBuilder.setView(input);
+        alertDialogBuilder.setIcon(R.drawable.key);
+
+        String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Friday", "Saturday"};
+        alertDialogBuilder.setMultiChoiceItems(days, checked, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                checked[which] = !checked[which];
+            }
+        });
         alertDialogBuilder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                name = input.getText().toString();
                 timeIntervalProcessChoose();
             }
         });
@@ -75,6 +94,10 @@ public class Availability extends AppCompatActivity {
                 finish();
             }
         });
+
+        AlertDialog dialog = alertDialogBuilder.create();
+
+        dialog.show();
     }
 
     public void timeIntervalProcessChoose() {
@@ -98,6 +121,14 @@ public class Availability extends AppCompatActivity {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             hourMinute.add(hourOfDay);
             hourMinute.add(minute);
+            if(hourMinute.size() == 4) {
+                Period period = new Period(name);
+                for(int i = 0; i < 7; ++i) {
+                    if(checked[i]) {
+                        period.addTime(i, hourMinute.get(3), hourMinute.get(1), hourMinute.get(2), hourMinute.get(0));
+                    }
+                }
+            }
         }
     };
 
