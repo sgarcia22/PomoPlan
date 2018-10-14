@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">PomoPlan</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="task_name">Task Name</string>
+    <string name="add_task">Add Task</string>
+    <string name="time_val">Time</string>
+
+    <string-array name="Periods">
+        <item>Home</item>
+        <item>Work</item>
+    </string-array>
+    <string name="title_activity_availability">Availability</string>
+
+</resources>
