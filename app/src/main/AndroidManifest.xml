@@ -21,8 +21,11 @@
         </activity>
         <activity
             android:name=".ScheduleActivity"
-            android:launchMode="singleInstance"
-            android:label="@string/title_activity_schedule"></activity>
+            android:label="@string/title_activity_schedule"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".PomodoroTimer"
+            android:label="@string/title_activity_pomodoro_timer"></activity>
     </application>
 
 </manifest>
