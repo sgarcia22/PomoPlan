@@ -93,7 +93,7 @@ public class Schedule {
 		}
 		return intervals;
 	}
-	
+
 	public static ArrayList<String> scheduleOutput(ArrayList<ScheduledTask> scheduledTasks) {
 		ArrayList<String> schedule = new ArrayList<String>();
 		for(ScheduledTask task: scheduledTasks) {
