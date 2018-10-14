@@ -107,5 +107,4 @@ public class MainNav extends AppCompatActivity {
         listItems.add(inputtedTask);
         adapter.notifyDataSetChanged();
     }
-
 }
