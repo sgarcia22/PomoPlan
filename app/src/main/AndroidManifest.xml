@@ -12,6 +12,7 @@
         <activity
             android:name=".MainNav"
             android:label="@string/app_name">
+            android:launchMode="singleInstance"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,8 +20,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Availability"
-            android:label="@string/title_activity_availability"></activity>
+            android:name=".ScheduleActivity"
+            android:launchMode="singleInstance"
+            android:label="@string/title_activity_schedule"></activity>
     </application>
 
 </manifest>
