@@ -27,6 +27,7 @@
         android:text="@string/add_task"
         app:layout_constraintBottom_toTopOf="@+id/menu"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toEndOf="@+id/editText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
@@ -45,16 +46,17 @@
         app:layout_constraintBottom_toTopOf="@+id/add_task"
         app:layout_constraintEnd_toStartOf="@+id/time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_items"
+
         tools:text="Task Name" />
 
+    <!--
     <ListView
         android:id="@+id/list_items"
         android:layout_width="336dp"
         android:layout_height="347dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="39dp"
         android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toTopOf="@+id/add_task"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,36 +64,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
-
+    -->
     <EditText
         android:id="@+id/time"
         android:layout_width="103dp"
         android:layout_height="43dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="time"
         android:text="@string/time_val"
         app:layout_constraintBottom_toTopOf="@+id/add_task"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.691"
+        app:layout_constraintHorizontal_bias="0.87"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_items" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="47dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="67dp"
-        android:entries="@mipmap/ic_launcher"
+        android:layout_width="112dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:entries="@array/Periods"
+        android:spinnerMode="dropdown"
+        android:textColor="#000000"
+        android:textSize="48dp"
         app:layout_constraintBottom_toTopOf="@+id/menu"
+        app:layout_constraintEnd_toStartOf="@+id/add_task"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="289dp"
+        android:layout_height="259dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="11dp"
+        app:layout_constraintBottom_toTopOf="@+id/time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/time"
-        app:layout_constraintTop_toBottomOf="@+id/list_items"
-        app:layout_constraintVertical_bias="0.535" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
