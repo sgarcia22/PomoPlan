@@ -27,3 +27,4 @@
             android:name=".PomodoroTimer"
             android:label="@string/title_activity_pomodoro_timer"></activity>
     </application>
+</manifest>
