@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 public class MainNav extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private ArrayList<UnscheduledTask> listItems;
+    public static ArrayList<UnscheduledTask> listItems;
     private TaskListAdapter adapter;
     private ListView scroll;
     private Spinner spinner;
@@ -46,7 +46,7 @@ public class MainNav extends AppCompatActivity {
                     startActivity(intent2);
                     return true;
                 case R.id.navigation_notifications:
-                    Intent intent3 = new Intent(MainNav.this, MainNav.class);
+                    Intent intent3 = new Intent(MainNav.this, PomodoroTimer.class);
                     intent3.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent3);
                     return true;
@@ -72,7 +72,6 @@ public class MainNav extends AppCompatActivity {
 
         listItems = new ArrayList<UnscheduledTask>();
 
-        //TODO
         adapter = new TaskListAdapter(this, R.layout.adapter_view_layout, listItems);
         scroll.setAdapter(adapter);
 
