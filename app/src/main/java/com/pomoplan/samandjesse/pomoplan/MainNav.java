@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -15,15 +13,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import java.util.*;
 import android.view.WindowManager;
-import java.text.DateFormat;
-import java.util.Date;
-import java.text.*;
-import java.util.regex.Pattern;
+import android.content.Intent;
 
 public class MainNav extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private ArrayList<Task> listItems;
+    private ArrayList<UnscheduledTask> listItems;
     private TaskListAdapter adapter;
     private ListView scroll;
     private Spinner spinner;
@@ -36,15 +31,18 @@ public class MainNav extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
-                    return true;
+                    break;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
-                    return true;
+                    Intent intent = new Intent (MainNav.this, Scheduler.class);
+                    startActivityForResult(intent, 0); // Result to ensure about back track of proper activity
+                    setContentView(R.layout.activity_scheduler);
+                    break;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
-                    return true;
+                    break;
             }
-            return false;
+            return true;
         }
     };
 
@@ -63,9 +61,8 @@ public class MainNav extends AppCompatActivity {
         //Get the list view
         scroll = (ListView) findViewById(R.id.listView);
 
-        listItems = new ArrayList<Task>();
+        listItems = new ArrayList<UnscheduledTask>();
 
-        //TODO
         adapter = new TaskListAdapter(this, R.layout.adapter_view_layout, listItems);
         scroll.setAdapter(adapter);
 
@@ -80,6 +77,21 @@ public class MainNav extends AppCompatActivity {
                 createTask();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu:
+                Intent intent = new Intent(this, MainNav.class);
+                this.startActivity(intent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+        return true;
     }
 
     //Create a task with the given inputs
@@ -113,8 +125,10 @@ public class MainNav extends AppCompatActivity {
         } catch (NumberFormatException e) {
             return;
         }
+        ArrayList<Period> periods = new ArrayList<Period>();
+        periods.add(p);
 
-        Task inputtedTask = new Task(task, hours, minutes, p);
+        UnscheduledTask inputtedTask = new UnscheduledTask(task, periods, hours, minutes);
 
         listItems.add(inputtedTask);
         adapter.notifyDataSetChanged();
