@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import java.util.*;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 public class MainNav extends AppCompatActivity {
 
@@ -21,6 +24,7 @@ public class MainNav extends AppCompatActivity {
     private ArrayList<String> listItems = new ArrayList<String>();
     private ArrayAdapter<String> adapter;
     private ListView scroll;
+    private Spinner spinner;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -47,6 +51,9 @@ public class MainNav extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_nav);
 
+        //Prevent keyboard from popping up at the beginning
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.menu);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -59,9 +66,9 @@ public class MainNav extends AppCompatActivity {
         scroll.setAdapter(adapter);
 
         //Drop Down Button
-        Spinner spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
 
-
+        //Add a task to the list
         Button addTask = (Button) findViewById(R.id.add_task);
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,15 +78,18 @@ public class MainNav extends AppCompatActivity {
         });
     }
 
+    //Create a task with the given inputs
     private void createTask () {
         String taskName = findViewById(R.id.editText).toString();
         String time = findViewById(R.id.time).toString();
+        String spinnerText = spinner.getSelectedItem().toString();
 
-
-        if (taskName.isEmpty() || time.isEmpty()) {
+        if (taskName.isEmpty() || time.isEmpty() || spinnerText.isEmpty()) {
             //Add task to the list
             return;
         }
+
+        taskToList(taskName);
     }
 
     private void taskToList (String task) {
