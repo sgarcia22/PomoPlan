@@ -18,6 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Availability"
+            android:label="@string/title_activity_availability"></activity>
     </application>
 
 </manifest>
