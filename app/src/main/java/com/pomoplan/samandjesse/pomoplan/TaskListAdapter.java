@@ -31,7 +31,6 @@ public class TaskListAdapter extends ArrayAdapter<UnscheduledTask> {
         String periodText = period.name;
         String totaltime = hoursText + ":" + minutesText;
 
-        Task newTask = new Task(name, hours, minutes, period);
         LayoutInflater inflator = LayoutInflater.from(currContext);
         convertView = inflator.inflate(currResource, parent, false);
 
