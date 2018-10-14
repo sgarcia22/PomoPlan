@@ -28,7 +28,7 @@ public class Period {
 	}
 	
 	public String getStringFormattedTime(int day) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h a");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
 		int counter = 1; 
 		String returnString = "";
 		for(OffsetTime time: availability.get(day)) {
@@ -46,7 +46,7 @@ public class Period {
 	
 	public ArrayList<Integer> getArithmeticFormattedTime(int day) {
 		ArrayList<Integer> timeSlots = new ArrayList<Integer>();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("km");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("kmm");
 		for(OffsetTime time: availability.get(day)) {
 			timeSlots.add(Integer.valueOf(time.format(formatter)));
 		}
