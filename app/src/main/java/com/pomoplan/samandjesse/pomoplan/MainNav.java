@@ -1,5 +1,6 @@
 package com.pomoplan.samandjesse.pomoplan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -35,13 +36,19 @@ public class MainNav extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    Intent intent1 = new Intent(MainNav.this, MainNav.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent1);
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    Intent intent2 = new Intent(MainNav.this, ScheduleActivity.class);
+                    intent2.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent2);
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    Intent intent3 = new Intent(MainNav.this, MainNav.class);
+                    intent3.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent3);
                     return true;
             }
             return false;

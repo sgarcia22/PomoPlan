@@ -7,9 +7,10 @@
     <string name="add_task">Add Task</string>
     <string name="time_val">Time</string>
 
-    <string-array name = "Periods">
+    <string-array name="Periods">
         <item>Home</item>
         <item>Work</item>
     </string-array>
+    <string name="title_activity_schedule">Schedule</string>
 
 </resources>
