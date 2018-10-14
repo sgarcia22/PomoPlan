@@ -14,15 +14,14 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
 
     private Context currContext;
     private int currResource;
-    public TaskListAdapter(@androidx.annotation.NonNull Context context, int resource, @androidx.annotation.NonNull List<Task> objects) {
+    public TaskListAdapter(Context context, int resource, List<Task> objects) {
         super(context, resource, objects);
         currContext = context;
         currResource = resource;
     }
 
-    @androidx.annotation.NonNull
     @Override
-    public View getView(int position, @androidx.annotation.Nullable View convertView, @androidx.annotation.NonNull ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         String name = getItem(position).getName();
         int hours = getItem(position).getTaskLengthHours();
         String hoursText = Integer.toString(hours);
